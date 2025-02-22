@@ -12,7 +12,8 @@
 
  const App = () => {
  
-  const url = "http://localhost:1200";
+ 
+  const url = import.meta.env.VITE_URL;
 
    return (
      <div> 
