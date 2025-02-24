@@ -26,24 +26,25 @@
 // export default foodRouter;
 import express from 'express';
 import { addFood, listFood, removeFood } from '../controllers/foodController.js';
-import multer from 'multer';
+// import multer from 'multer';
+import upload from '../config/Multer.js';
 
 const foodRouter = express.Router();
 
 // Configure multer to use the writable /tmp directory
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '/tmp'); // Use /tmp instead of /var/task/uploads
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`);
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, '/tmp'); // Use /tmp instead of /var/task/uploads
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, `${Date.now()}-${file.originalname}`);
+//     }
+// });
 
-const upload = multer({ storage });
+// const upload = multer({ storage });
 
 // Apply multer only on the specific route that requires file upload
-foodRouter.post('/add', upload.single('image'), addFood);
+foodRouter.post('/add', upload.single('file'), addFood);
 foodRouter.get('/list', listFood);
 foodRouter.post('/remove', removeFood);
 
