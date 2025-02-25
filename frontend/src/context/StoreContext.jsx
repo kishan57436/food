@@ -49,20 +49,41 @@ const removeFromCart = async(itemId) => {
     }
 }
 
- const getTotalCartAmount = (itemId)=> {
-    let totalAmount =0;
-    console.log("cart details ha",cartItems)
-    for(const item in cartItems)
-    {  
-        if(cartItems[item]>0)
-      {  let itemInfo = food_list.find((product)=> product._id === item);
-        // console.log("itemifo",itemInfo)
-        // console.log("item info ha",itemInfo.price)
-        totalAmount +=itemInfo?.price * cartItems[item];
-    }
-    }
+ // const getTotalCartAmount = (itemId)=> {
+ //    let totalAmount =0;
+ //    console.log("cart details ha",cartItems)
+ //    for(const item in cartItems)
+ //    {  
+ //        if(cartItems[item]>0)
+ //      {  let itemInfo = food_list.find((product)=> product._id === item);
+ //        // console.log("itemifo",itemInfo)
+ //        // console.log("item info ha",itemInfo.price)
+ //        totalAmount +=itemInfo?.price * cartItems[item];
+ //    }
+ //    }
+ //    return totalAmount;
+ // }
+    const getTotalCartAmount = () => {
+    let totalAmount = 0;
+
+    console.log("Cart details:", cartItems);
+
+    // Iterate over cartItems and calculate the total amount
+    Object.entries(cartItems).forEach(([itemId, quantity]) => {
+        if (quantity > 0) {
+            const itemInfo = food_list.find((product) => product._id === itemId);
+            
+            if (itemInfo) {
+                totalAmount += itemInfo.price * quantity;
+            } else {
+                console.warn(`Item with ID ${itemId} not found in the food list.`);
+            }
+        }
+    });
+
     return totalAmount;
- }
+};
+
 
  const fetchFoodList = async () => {
   const response = await axios.get(url+"/api/food/list"); 
