@@ -7,7 +7,7 @@ const url = import.meta.env.VITE_URL;
 
 export const fetchFoodList = async () => {
     try {
-        const response = await fetch(`${API_URL}/food/list`);
+        const response = await fetch(`${url}/food/list`);
         const data = await response.json();
         return data;
     } catch (error) {
