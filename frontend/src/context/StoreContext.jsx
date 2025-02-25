@@ -56,9 +56,9 @@ const removeFromCart = async(itemId) => {
     {  
         if(cartItems[item]>0)
       {  let itemInfo = food_list.find((product)=> product._id === item);
-        console.log("itemifo",itemInfo)
-        console.log("item info ha",itemInfo.price)
-        totalAmount +=itemInfo.price * cartItems[item];
+        // console.log("itemifo",itemInfo)
+        // console.log("item info ha",itemInfo.price)
+        totalAmount +=itemInfo?.price * cartItems[item];
     }
     }
     return totalAmount;
